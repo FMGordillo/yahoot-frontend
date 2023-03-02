@@ -12,7 +12,7 @@ const Container = styled.div`
   grid-template-columns: 1fr auto;
 `;
 
-const socket = io("http://localhost:3001"); // change this to your server address
+const socket = io(process.env.REACT_APP_SOCKET_URL || "http://localhost:3001"); // change this to your server address
 
 function App() {
   const [isEndGame, setIsEndGame] = useState(false);
