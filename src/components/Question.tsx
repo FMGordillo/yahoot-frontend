@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import Image from "next/image";
 import type { FunctionComponent } from "react";
 
 const Container = styled.div`
@@ -40,7 +41,7 @@ const QuestionContainer: FunctionComponent<any> = ({
     <h1>Question</h1>
     <p>{question.text}</p>
     <Figure>
-      <img src={question.imgSrc} alt="Not working, sorry" />
+      <Image src={question.imgSrc} alt="Not working, sorry" />
     </Figure>
     <Options>
       {question.choices.map((choice: string) => (
