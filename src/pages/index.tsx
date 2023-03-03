@@ -1,15 +1,23 @@
 import styled from "@emotion/styled";
-import { useEffect, useState } from "react";
-import io from "socket.io-client";
 import AdminContainer from "components/Admin";
 import EndGameContainer from "components/EndGame";
 import NewUserContainer from "components/NewUser";
 import QuestionContainer from "components/Question";
+import SEO from "components/SEO";
+import { ReactElement, useEffect, useState } from "react";
+import io from "socket.io-client";
+import { mediaQuery } from "styles";
 
 const Container = styled.div`
-  display: grid;
-  margin: 0 280px;
-  grid-template-columns: 1fr auto;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  ${mediaQuery("md")} {
+    grid-template-columns: auto;
+  }
 `;
 
 const socket = io(process.env.REACT_APP_SOCKET_URL || "http://localhost:3001");
@@ -71,7 +79,12 @@ function App() {
       <div>
         {name === "ADMIN" && <AdminContainer socket={socket} />}
         {isEndGame && <EndGameContainer />}
-        {!name && <NewUserContainer handleSubmit={handleSubmit} />}
+        {!name && (
+          <NewUserContainer
+            isDisabled={!socket.connected}
+            handleSubmit={handleSubmit}
+          />
+        )}
         {question && (
           <QuestionContainer
             isAnswered={!!answer}
@@ -80,14 +93,21 @@ function App() {
           />
         )}
       </div>
-      <aside>
+      <section>
         <h1>Players:</h1>
         {players.map((player: any) => (
           <p key={player.id}>{player.name}</p>
         ))}
-      </aside>
+      </section>
     </Container>
   );
 }
+
+App.getLayout = (page: ReactElement) => (
+  <>
+    <SEO title="Game" />
+    {page}
+  </>
+);
 
 export default App;

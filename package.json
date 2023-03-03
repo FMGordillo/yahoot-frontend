@@ -38,6 +38,6 @@
   },
   "lint-staged": {
     "*.{ts,tsx,md,json}": "prettier --write",
-    "*.{ts,tsx}": "npm run lint -- --file"
+    "*.{ts,tsx}": "eslint"
   }
 }
