@@ -1,10 +1,10 @@
 import styled from "@emotion/styled";
 import { useEffect, useState } from "react";
 import io from "socket.io-client";
-import AdminContainer from "./components/Admin";
-import EndGameContainer from "./components/EndGame";
-import NewUserContainer from "./components/NewUser";
-import QuestionContainer from "./components/Question";
+import AdminContainer from "components/Admin";
+import EndGameContainer from "components/EndGame";
+import NewUserContainer from "components/NewUser";
+import QuestionContainer from "components/Question";
 
 const Container = styled.div`
   display: grid;
@@ -12,7 +12,7 @@ const Container = styled.div`
   grid-template-columns: 1fr auto;
 `;
 
-const socket = io(process.env.REACT_APP_SOCKET_URL || "http://localhost:3001"); // change this to your server address
+const socket = io(process.env.REACT_APP_SOCKET_URL || "http://localhost:3001");
 
 function App() {
   const [isEndGame, setIsEndGame] = useState(false);
